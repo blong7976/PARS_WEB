@@ -100,6 +100,9 @@ export default {
             ]
         }
     },
+    created() {
+        this.common.setScrollTop()
+    }
 }
 </script>
 <style scoped>

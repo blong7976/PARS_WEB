@@ -390,7 +390,6 @@ img { max-width: 100%; }
     color: #2c3e50;
     padding: 10px 0 10px 15px;
     box-sizing: border-box;
-    display: none;
 }
 .line_box span{
     display: inline-block;
@@ -586,7 +585,7 @@ img { max-width: 100%; }
     width: 100%;
     background: rgb(255, 255, 255) !important;
     border-radius: 2px !important;
-    padding: 8px !important;
+    /* padding: 8px !important; */
     border-width: 1px !important;
     border-style: solid !important;
     border-color: rgb(235, 235, 235) !important;

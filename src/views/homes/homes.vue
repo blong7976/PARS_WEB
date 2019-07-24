@@ -13,89 +13,42 @@
                 <div class="type_bg animated">
                     <h6 class="type_tit2">Pars整租</h6>
                     <div class="info_box">
-                        <label>
-                            <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">不限                         
-                        </label>
-                        <label>
-                           <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">一居                         
-                        </label>
-                        <label>
-                            <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">二居                         
-                        </label>
-                        <label>
-                            <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">三居                         
-                        </label>
-                        <label>
-                            <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">四居                         
+                        <label v-for="(item,index) in Entiretenancy" :key="index">
+                            <input class="checkbox" type="checkbox" v-model="item.checked">{{item.name}}                         
                         </label>
                     </div>
                 </div> 
                 <div class="type_bg animated">
                     <h6 class="type_tit2">区域</h6>                
                     <ul class="position_tab">
-                        <li class="list_li"  data-item="1"><b>商圈</b><i></i>
+                        <li  v-for="(item,index) in District" 
+                             :key="index"
+                             :class="item.checked?'list_li cur':'list_li'" 
+                             @click="ClDistrict(item)">
+                             <b>{{item.name}}</b><i></i>
                             <div class="position_box">
-                                <div class="line_box">
-                                    <span>A商圈</span>
-                                    <span>B商圈</span>
-                                    <span>C商圈</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list_li"  data-item="2"><b>学校</b><i></i>
-                            <div class="position_box">
-                                <div class="line_box">
-                                    <span>A学校</span>
-                                    <span>B学校</span>
-                                    <span>C学校</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list_li"  data-item="3"><b>地铁</b><i></i>
-                            <div class="position_box">
-                                <div class="line_box">
-                                    <span>A地铁</span>
-                                    <span>B地铁</span>
-                                    <span>C地铁</span>
+                                <div class="line_box" v-if="item.checked">
+                                    <span v-for="(v,idx) in item.list" 
+                                          :key="idx"
+                                          @click.stop="clClDistrictli(item,v)">{{v.name}}</span>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div> 
                 <div class="type_bg animated">
-                    <h6 class="type_tit2">Pars合租</h6>
+                    <h6 class="type_tit2">Pars合租 </h6>
                     <div class="info_box">
-                        <label>
-                            <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">不限                         
-                        </label>
-                        <label>
-                            <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">主人房                         
-                        </label>
-                        <label>
-                            <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">普通房                         
-                        </label>
-                        <label>
-                            <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">佣人房                         
+                        <label v-for="(item,index) in Jointrent" :key="index">
+                            <input class="checkbox" type="checkbox" v-model="item.checked">{{item.name}}                         
                         </label>
                     </div>
                 </div> 
                 <div class="type_bg animated">
                         <h6 class="type_tit2">价格</h6>
                         <div class="info_box">
-                            <label>
-                                <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();"><$800                         
-                            </label>
-                            <label>
-                                <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">$800-1200                          
-                            </label>
-                            <label>
-                                <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">$1200-1600                          
-                            </label>
-                            <label>
-                                <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">$1600-2000                         
-                            </label>
-                            <label>
-                                <input class="checkbox" type="checkbox" id="yiju" value="yiju" onclick="submit_by_attr();">$2000+                         
+                            <label v-for="(item,index) in Price" :key="index">
+                                <input class="checkbox" type="checkbox" v-model="item.checked">{{item.name}}                         
                             </label>
                         </div>  
                 </div>  
@@ -145,6 +98,56 @@
 export default {
     data() {
         return {
+            Entiretenancy:[
+                {type:0,name:'不限',checked:false},
+                {type:1,name:'一居',checked:false},
+                {type:2,name:'二居',checked:false},
+                {type:3,name:'三居',checked:false},
+                {type:4,name:'四居',checked:false}
+            ],
+            District:[
+                {
+                    name:"商圈",
+                    checked:false,
+                    list:[
+                        {type:0,name:'A商圈',checked:false},
+                        {type:1,name:'B商圈',checked:false},
+                        {type:2,name:'C商圈',checked:false}
+                    ]
+                },
+                {
+                    name:"学校",
+                    checked:false,
+                    list:[
+                        {type:0,name:'A学校',checked:false},
+                        {type:1,name:'B学校',checked:false},
+                        {type:2,name:'C学校',checked:false}
+                    ]
+                },
+                {
+                    name:"地铁",
+                    checked:false,
+                    list:[
+                        {type:0,name:'A地铁',checked:false},
+                        {type:1,name:'B地铁',checked:false},
+                        {type:2,name:'C地铁',checked:false},
+                    ]
+                }
+            ],
+            Jointrent:[
+                {type:0,name:'不限',checked:false},
+                {type:1,name:'主人房',checked:false},
+                {type:2,name:'普通房',checked:false},
+                {type:3,name:'佣人房',checked:false},
+            ],
+            Price:[
+                {type:0,name:'<$800',checked:false},
+                {type:1,name:'$800-1200',checked:false},
+                {type:2,name:'$1200-1600',checked:false},
+                {type:3,name:'$1600-2000',checked:false},
+                {type:4,name:'$2000+',checked:false}
+            ],
+
             houses:[
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563885703373&di=8d8b2bd9aae9f5c2e7cfd2f03df83733&imgtype=0&src=http%3A%2F%2Fimg.redocn.com%2F201606%2F1%2F3799384_14647736219v9x.jpg"},
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563885703373&di=8d8b2bd9aae9f5c2e7cfd2f03df83733&imgtype=0&src=http%3A%2F%2Fimg.redocn.com%2F201606%2F1%2F3799384_14647736219v9x.jpg"},
@@ -152,13 +155,29 @@ export default {
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563899210251&di=212cc59b84cf26e4ab80f5a741512926&imgtype=0&src=http%3A%2F%2Fpic2.to8to.com%2Fcase%2F1703%2F03%2F20170303_9717a97cc866e95672dc02bpg4l1ihxw_sp.jpg"},
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563899210251&di=212cc59b84cf26e4ab80f5a741512926&imgtype=0&src=http%3A%2F%2Fpic2.to8to.com%2Fcase%2F1703%2F03%2F20170303_9717a97cc866e95672dc02bpg4l1ihxw_sp.jpg"},
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563899210251&di=212cc59b84cf26e4ab80f5a741512926&imgtype=0&src=http%3A%2F%2Fpic2.to8to.com%2Fcase%2F1703%2F03%2F20170303_9717a97cc866e95672dc02bpg4l1ihxw_sp.jpg"},
-                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563885703373&di=8d8b2bd9aae9f5c2e7cfd2f03df83733&imgtype=0&src=http%3A%2F%2Fimg.redocn.com%2F201606%2F1%2F3799384_14647736219v9x.jpg"},
+                {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563885703373&di=8d8b2bd9aae9f5c2e7cfd2f03df83733&imgtype=0&src=http%3A%2F%2Fimg.redocn.com%2F201606%2F1%2F3799384_14647736219v9x.jpg"},
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563885703373&di=8d8b2bd9aae9f5c2e7cfd2f03df83733&imgtype=0&src=http%3A%2F%2Fimg.redocn.com%2F201606%2F1%2F3799384_14647736219v9x.jpg"},
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563885703373&di=8d8b2bd9aae9f5c2e7cfd2f03df83733&imgtype=0&src=http%3A%2F%2Fimg.redocn.com%2F201606%2F1%2F3799384_14647736219v9x.jpg"},
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563899210251&di=212cc59b84cf26e4ab80f5a741512926&imgtype=0&src=http%3A%2F%2Fpic2.to8to.com%2Fcase%2F1703%2F03%2F20170303_9717a97cc866e95672dc02bpg4l1ihxw_sp.jpg"},
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563899210251&di=212cc59b84cf26e4ab80f5a741512926&imgtype=0&src=http%3A%2F%2Fpic2.to8to.com%2Fcase%2F1703%2F03%2F20170303_9717a97cc866e95672dc02bpg4l1ihxw_sp.jpg"},
                 {img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563899210251&di=212cc59b84cf26e4ab80f5a741512926&imgtype=0&src=http%3A%2F%2Fpic2.to8to.com%2Fcase%2F1703%2F03%2F20170303_9717a97cc866e95672dc02bpg4l1ihxw_sp.jpg"}
             ]
+        }
+    },
+    created() {
+        this.common.setScrollTop()
+    },
+    methods: {
+        ClDistrict(item){
+            this.District.forEach(td=>{
+                td.checked=false
+            })
+            item.checked=true
+        },
+        clClDistrictli(item,v){
+            this.District.forEach(td=>{
+                td.checked=false
+            })
         }
     },
 }

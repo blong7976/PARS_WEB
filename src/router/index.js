@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/views/layout/Layout'
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '',
+      path: '/',
       component: Layout,
       redirect: 'index',
       children: [
@@ -42,5 +43,12 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/Success',
+      component: () => import('@/views/prompt/success'),
+      name: 'homes',
+      meta: { title: '预订成功'}
+    },
+
   ]
 })

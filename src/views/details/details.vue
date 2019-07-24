@@ -2,7 +2,7 @@
 <div class="mainer">
     <div class="page_banner" >
         <div class="banner banners">
-            <el-carousel class="item">
+            <el-carousel arrow="always" :interval="5000">
                 <el-carousel-item v-for="item in 4" :key="item">
                     <div class=""><div class="img1"><img src="../../assets/img/Hmlet_Lush_cover.jpg" /></div></div>
                 </el-carousel-item>
@@ -154,26 +154,56 @@
                                    <div class="book-it__fields">
                                         <div style="margin-top: 16px; margin-bottom: 8px;">
                                             <label class="_xybsfh">姓名</label>
-                                            <input type="text" class="_15w9m01" placeholder="请输入姓名">
+                                            <el-input
+                                                class="_15w9m01"
+                                                placeholder="请输入姓名"
+                                                v-model="form.name"
+                                                clearable>
+                                            </el-input>
                                         </div>
 
                                         <div style="margin-top: 16px; margin-bottom: 8px;">
                                             <label class="_xybsfh">电话</label>
-                                            <input type="number" class="_15w9m01" placeholder="请输入电话">
+                                            <el-input
+                                                class="_15w9m01"
+                                                type="number"
+                                                placeholder="请输入电话"
+                                                v-model="form.tel"
+                                                clearable>
+                                            </el-input>
                                         </div>
 
                                         <div style="margin-top: 16px; margin-bottom: 8px;">
                                                 <label class="_xybsfh">入住时间</label>
-                                                <input type="date" class="_15w9m01" placeholder="请输入入住时间">
+                                                <div class="_15w9m01">
+                                                    <el-date-picker
+                                                    v-model="form.Check_in_time"
+                                                    align="right"
+                                                    size="medium"
+                                                    type="date"
+                                                    placeholder="请输入入住时间"
+                                                    :picker-options="pickerOptions">
+                                                    </el-date-picker>
+                                                </div>
+
                                         </div>
 
                                         <div style="margin-top: 16px; margin-bottom: 8px;">
                                                 <label class="_xybsfh">备注</label>
-                                                <textarea  id=""  rows="4" class="_15w9m01 _15w9m001" placeholder="请输入备注信息"></textarea>
+                                                <el-input
+                                                class="_15w9m01 _15w9m001"
+                                                type="textarea"
+                                                placeholder="请输入备注内容"
+                                                v-model="form.note"
+                                                maxlength="200"
+                                                rows="7"
+                                                show-word-limit
+                                                >
+                                                </el-input>
                                         </div>
 
                                         <div style="margin-top: 24px;">
-                                            <button class="_9rrtgtg" id="submit">在线预订</button>
+                                            <button class="_9rrtgtg" id="submit" @click="playOrder">在线预订</button>
                                         </div>
                                    </div>
                                </div>
@@ -188,22 +218,71 @@
 </template>
 <script>
 import {Message} from 'element-ui'
-
 export default {
-    mounted() {
-        
+    data() {
+        return {
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() < Date.now();
+                }
+            },
+            form:{
+                name:"", //入住人姓名
+                Check_in_time:"", //入住时间   
+                note:"", //备注
+            }
+        }
+    },
+    created() {
+        this.common.setScrollTop()
+    },
+    methods: {
+
+        playOrder(){
+            this.$router.push({path:'Success'})
+        }
     },
 }
 </script>
-<style lang="">
-  .el-carousel__container{
-      height:650px;
-  }
-  .el-carousel__item:nth-child(2n) {
+<style lang="" scope>
+.el-input--suffix .el-input__inner,
+.el-textarea__inner{border: none}
+.el-carousel__container{
+    height:650px;
+    overflow: hidden;
+}
+.el-carousel__container .img1 img,
+.el-carousel__container .img1>div{
+    width: 100%;min-height: 100%;
+}
+.el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
-  }
+}
   
-  .el-carousel__item:nth-child(2n+1) {
+.el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
-  }
+}
+@media only screen and (max-width: 1500px){
+    
+}
+@media only screen and (max-width: 1200px){
+    .el-carousel__container{
+        height:500px;
+    }
+}
+@media only screen and (max-width: 768px){
+    .el-carousel__container{
+        height:308px;
+    }
+}
+@media only screen and (max-width: 750px){
+    .el-carousel__container{
+        height:193px;
+    }
+}
+@media only screen and (max-width: 320px){
+    .el-carousel__container{
+        height:165px;
+    }
+}
 </style>

@@ -79,6 +79,9 @@ export default {
             item_tit:["Pase 简介","Pase 愿景","Pase 宗旨","Pase 理念"]
         }
     },
+    created() {
+        this.common.setScrollTop()
+    },
     methods: {
         selectPage(index){
            this.page=index+1
