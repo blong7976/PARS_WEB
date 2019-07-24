@@ -1,4 +1,4 @@
-# pars
+# PARS
 
 > house
 
