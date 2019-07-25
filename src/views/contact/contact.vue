@@ -45,9 +45,6 @@
         </div>
     </div>
 </div>
-<div class="contact_ft">
-    <p>Copyright©2014sanguui.com,All Rights Reserved 新加坡 Pase 租房网 版权所有 </p>
-</div>
 </div>
 </template>
 <script>

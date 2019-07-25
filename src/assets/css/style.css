@@ -1003,7 +1003,7 @@ body.bd_ct { background:#1e1f20; }
     .page_article{padding:0 10px;}
     .contact_box .cell{width:95%;}
     .contact_ft{position:initial;line-height:25px;padding:10px 0;height:auto;}
-    .page_contact{padding:60px 0 10px}
+    .page_contact{padding:60px 0 10px !important}
     .page_details .web .img1{ float:none;width:100%;}
     .page_details{ padding:0 15px;}
 

@@ -38,7 +38,7 @@
                             <h1 class="_13ennai4">介绍</h1>
                             <div style="margin-top: 32px;">
                                 <div class="_1m9t1a27 VR">
-                                    <img src="img/vr@2x.png" style="height: 14px;margin-right:20px">VR 看房前往体验
+                                    <img src="../../assets/img/vr@2x.png" style="height: 14px;margin-right:20px">VR 看房前往体验
                                 </div>
                             </div>
                             <div class="_6z3til">
@@ -59,56 +59,11 @@
 
                         <div>
                             <h1 class="_13ennai4">房源设施</h1>
-                            <!-- <div style="margin-top: 16px; margin-bottom: 16px;"><div class="_7qp4lh"></div></div> -->
                             <div class="_6z3til">
                                 <div class="_2h22gn">
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/swimmingpool@2x.png"></div>
-                                        <div class="_ppgibgk">游泳池</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/GYM@2x.png"></div>
-                                        <div class="_ppgibgk">健身房</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/BBQ@2x.png"></div>
-                                        <div class="_ppgibgk">烧烤台</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/tenniscourt@2x.png"></div>
-                                        <div class="_ppgibgk">网球场</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/airconditioner@2x.png"></div>
-                                        <div class="_ppgibgk">空调</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/washer@2x.png"></div>
-                                        <div class="_ppgibgk">洗衣机</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/microwe@2x.png"></div>
-                                        <div class="_ppgibgk">微波炉</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/refrigerator@2x.png"></div>
-                                        <div class="_ppgibgk">冰箱</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/closet@2x.png"></div>
-                                        <div class="_ppgibgk">衣柜</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/bed@2x.png"></div>
-                                        <div class="_ppgibgk">床</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/desk@2x.png"></div>
-                                        <div class="_ppgibgk">书桌</div>
-                                    </div>
-                                    <div class="_1nef7mtw">
-                                        <div class="icon"><img src="../../assets/img/wifi@2x.png"></div>
-                                        <div class="_ppgibgk">WiFi</div>
+                                    <div class="_1nef7mtw" v-for="(item,index) in facilities" :key="index">
+                                        <div class="icon"><img :src="item.icon"></div>
+                                        <div class="_ppgibgk">{{item.name}}</div>
                                     </div>
                                 </div> 
                             </div>
@@ -230,9 +185,60 @@ export default {
                 name:"", //入住人姓名
                 Check_in_time:"", //入住时间   
                 note:"", //备注
-            }
+            },
+            facilities:[
+                { 
+                    icon:require("../../assets/img/swimmingpool@2x.png"),
+                    name:"游泳池" 
+                },
+                { 
+                    icon:require("../../assets/img/GYM@2x.png"),
+                    name:"健身房"
+                },
+                { 
+                    icon:require("../../assets/img/BBQ@2x.png") ,
+                    name:"烧烤台"
+                },
+                { 
+                    icon:require("../../assets/img/tenniscourt@2x.png") ,
+                    name:"网球场"
+                },
+                { 
+                    icon:require("../../assets/img/airconditioner@2x.png") ,
+                    name:"空调"
+                },  
+                { 
+                    icon:require("../../assets/img/washer@2x.png") ,
+                    name:"洗衣机"
+                },  
+                { 
+                    icon:require("../../assets/img/microwe@2x.png") ,
+                    name:"微波炉"
+                },  
+                { 
+                    icon:require("../../assets/img/refrigerator@2x.png") ,
+                    name:"冰箱"
+                }, 
+                { 
+                    icon:require("../../assets/img/closet@2x.png") ,
+                    name:"衣柜"
+                }, 
+                { 
+                    icon:require("../../assets/img/bed@2x.png") ,
+                    name:"床"
+                }, 
+                { 
+                    icon:require("../../assets/img/desk@2x.png") ,
+                    name:"书桌"
+                }, 
+                { 
+                    icon:require("../../assets/img/wifi@2x.png") ,
+                    name:"WiFi"
+                }
+            ]
         }
     },
+
     created() {
         this.common.setScrollTop()
     },
